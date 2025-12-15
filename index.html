@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Chat Wrapped</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+
+<body class="welcome-page">
+    <!-- Background animated emojis -->
+    <div class="background-emojis">
+        <div class="emoji-float e1" style="top: 5%; left: 10%;">🎉</div>
+        <div class="emoji-float e2" style="top: 20%; right: 8%;">🎊</div>
+        <div class="emoji-float e3" style="bottom: 15%; left: 5%;">✨</div>
+        <div class="emoji-float e4" style="bottom: 25%; right: 10%;">🌟</div>
+        <div class="emoji-float e1" style="top: 35%; left: 15%;">💫</div>
+        <div class="emoji-float e2" style="top: 50%; right: 5%;">🎭</div>
+        <div class="emoji-float e3" style="bottom: 35%; left: 12%;">🎪</div>
+        <div class="emoji-float e4" style="top: 65%; right: 15%;">🎨</div>
+    </div>
+
+    <div class="welcome-container">
+        <!-- Decorative Graphics -->
+        <div class="graphic graphic-1">🎉</div>
+        <div class="graphic graphic-2">🎊</div>
+        <div class="graphic graphic-3">✨</div>
+        <div class="graphic graphic-4">🌟</div>
+        <div class="graphic graphic-5">💫</div>
+        <div class="graphic graphic-6">🎭</div>
+        
+        <div class="welcome-content">
+            <h1 class="title">Group Chat Wrapped</h1>
+            <p class="subtitle">Your memes. Your chaos. Your story.</p>
+            <button class="enter-btn" id="enterBtn">Show Me The Chaos</button>
+        </div>
+    </div>
+
+    <script>
+        gsap.from(".title", { y: -50, opacity: 0, duration: 1 });
+        gsap.from(".subtitle", { y: 20, opacity: 0, duration: 1, delay: 0.5 });
+        gsap.from(".enter-btn", { opacity: 0, scale: 0.6, duration: 1, delay: 1, onComplete: () => {
+            // Ensure button is fully visible after animation
+            document.getElementById("enterBtn").style.opacity = "1";
+            document.getElementById("enterBtn").style.pointerEvents = "auto";
+        }});
+
+        document.getElementById("enterBtn").onclick = () => {
+            gsap.to(".welcome-container", {
+                opacity: 0,
+                scale: 0.8,
+                duration: 0.6,
+                onComplete: () => { window.location.href = "main.html"; }
+            });
+        };
+    </script>
+</body>
+</html>
