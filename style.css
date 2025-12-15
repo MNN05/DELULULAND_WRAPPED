@@ -7,8 +7,9 @@
 }
 
 body {
-    overflow: auto;
+    overflow: hidden;
     height: 100vh;
+    width: 100vw;
 }
 
 /* === ANIMATED BACKGROUND WITH FLOATING BLOBS === */
@@ -241,7 +242,7 @@ body {
     text-align: center;
     transition: left 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     backdrop-filter: blur(10px);
-    overflow: visible;
+    overflow: hidden;
 }
 
 .slide.active {
