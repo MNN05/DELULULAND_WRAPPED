@@ -2,7 +2,8 @@
 let currentSlide = 0;
 const slides = document.querySelectorAll(".slide");
 let musicPlaying = false;
-const totalSlides = slides.length;
+const totalSlides = document.querySelectorAll(".slide").length;
+
 
 // Animation Intervals (global scope for clearing them)
 let heartFireworksInterval = null;
