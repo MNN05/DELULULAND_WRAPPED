@@ -9,6 +9,17 @@ const totalSlides = document.querySelectorAll(".slide").length;
 let heartFireworksInterval = null;
 let flameInterval = null;
 
+const confettiContainer = document.querySelector('.confetti');
+const colors = ['#ff006e', '#ffbe0b', '#8338ec', '#3a86ff', '#06d6a0'];
+
+for (let i = 0; i < 40; i++) {
+  const confetti = document.createElement('span');
+  confetti.style.left = Math.random() * 100 + '%';
+  confetti.style.setProperty('--color', colors[Math.floor(Math.random() * colors.length)]);
+  confetti.style.animationDelay = (Math.random() * 4) + 's';
+  confettiContainer.appendChild(confetti);
+}
+
 // --- 1. SLIDE NAVIGATION LOGIC (FIXED) ---
 
 function updateNavButtons() {
@@ -84,21 +95,21 @@ function prevSlide() {
 
 function clearSlideAnimations(index) {
     // Battle Slide (Index 3)
-    if (index === 3) {
+    if (index === 4) {
         // Find and kill all active GSAP animations related to power texts
         gsap.killTweensOf(document.getElementById('kelly-power'));
         gsap.killTweensOf(document.getElementById('tammy-power'));
         // Any setInterval logic for the old battle needs to be stopped here if it was used instead of GSAP
     }
-    // Heart Slide (Index 7)
-    if (index === 7 && heartFireworksInterval) {
+    // Heart Slide (Index 8)
+    if (index === 9 && heartFireworksInterval) {
         clearInterval(heartFireworksInterval);
         heartFireworksInterval = null;
         const container = document.getElementById('heart-burst-container');
         if (container) container.innerHTML = '';
     }
     // Fire Slide (Index 8)
-    if (index === 8 && flameInterval) {
+    if (index === 10 && flameInterval) {
         clearInterval(flameInterval);
         flameInterval = null;
         const container = document.getElementById('flame-container');
@@ -114,17 +125,17 @@ function runSlideAnimations(index) {
     });
     
     // Trigger battle animation on slide 4 (index 3)
-    if (index === 3) {
+    if (index === 4) {
         setTimeout(animateBattle, 500);
     }
     
     // Trigger heart fireworks on slide 8 (index 7)
-    if (index === 7) {
+    if (index === 9) {
         setTimeout(startHeartFireworks, 300);
     }
     
     // Trigger flame animation on slide 9 (index 8)
-    if (index === 8) {
+    if (index === 10) {
         setTimeout(startFlameAnimation, 300);
     }
 }
@@ -137,14 +148,14 @@ function runSlideAnimations(index) {
 const heartEmojis = ['❤️', '💕', '💖', '💗', '💝', '💞', '💓'];
 
 function startHeartFireworks() {
-    if (currentSlide !== 7) return; 
+    if (currentSlide !== 9) return; 
     const container = document.getElementById('heart-burst-container'); 
     if (!container) return;
 
     if (heartFireworksInterval) clearInterval(heartFireworksInterval);
     
     const spawnAndClear = () => {
-        if (currentSlide !== 7) { 
+        if (currentSlide !== 9) { 
             clearInterval(heartFireworksInterval);
             return;
         }
@@ -189,14 +200,14 @@ function spawnHearts(container) {
 const fireEmojis = ['🔥', '💨'];
 
 function startFlameAnimation() {
-    if (currentSlide !== 8) return; 
+    if (currentSlide !== 10) return; 
     const container = document.getElementById('flame-container');
     if (!container) return;
 
     if (flameInterval) clearInterval(flameInterval);
     
     const spawnAndClear = () => {
-        if (currentSlide !== 8) { 
+        if (currentSlide !== 10) { 
             clearInterval(flameInterval);
             return;
         }
@@ -240,7 +251,7 @@ function createFlameParticle() {
 }
 
 function triggerFlames(count) {
-    if (currentSlide !== 8) return; 
+    if (currentSlide !== 10) return; 
 
     for (let i = 0; i < count; i++) {
         setTimeout(createFlameParticle, i * 50);
