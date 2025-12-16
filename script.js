@@ -19,58 +19,66 @@ function updateNavButtons() {
 }
 
 function showSlide(newIndex) {
-    if (newIndex < 0 || newIndex >= totalSlides || newIndex === currentSlide) {
-        return;
+  if (newIndex < 0 || newIndex >= totalSlides || newIndex === currentSlide) {
+    return;
+  }
+
+  const direction = newIndex > currentSlide ? 1 : -1;
+  const oldSlide = slides[currentSlide];
+  const newSlide = slides[newIndex];
+
+  // Clear old animations
+  clearSlideAnimations(currentSlide);
+
+  // Animate old slide out
+  gsap.to(oldSlide, {
+    x: -direction * 100 + '%',
+    opacity: 0,
+    duration: 0.8,
+    ease: 'power2.inOut',
+    onComplete: () => {
+      oldSlide.classList.remove('active');
+      oldSlide.style.visibility = 'hidden';
+      oldSlide.style.transform = direction === 1 
+        ? 'translateX(-100%)'   // if moving forward, push left
+        : 'translateX(100%)';   // if moving backward, push right
     }
-    
-    const direction = newIndex > currentSlide ? 1 : -1;
-    const oldSlide = slides[currentSlide];
-    const newSlide = slides[newIndex];
+  });
 
-    // --- 1. Clear Old Slide Animations ---
-    clearSlideAnimations(currentSlide);
+  // Prepare new slide off-screen
+  newSlide.style.visibility = 'visible';
+  newSlide.style.opacity = 1;
+  newSlide.style.transform = `translateX(${direction * 100}%)`;
+  newSlide.classList.add('active');
 
-    // --- 2. GSAP Transition ---
-    // Move current slide out
-    gsap.to(oldSlide, {
-        x: -direction * 100 + '%',
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power2.inOut',
-        onComplete: () => {
-            oldSlide.classList.remove('active');
-            oldSlide.style.opacity = 1;
-            oldSlide.style.transform = 'translateX(100%)';}
-    });
+  // Animate new slide in
+  gsap.to(newSlide, {
+    x: 0,
+    duration: 0.8,
+    ease: 'power2.inOut',
+    onComplete: () => {
+      newSlide.style.transform = 'translateX(0)';
+    }
+  });
 
-    // Move new slide in
-    newSlide.style.transform = `translateX(${direction * 100}%)`; // Start off-screen
-    newSlide.classList.add('active'); 
+  // Update state
+  currentSlide = newIndex;
+  updateNavButtons();
 
-    gsap.to(newSlide, {
-        x: 0,
-        duration: 0.8,
-        ease: 'power2.inOut',
-        onComplete: () => {
-             // Ensure the transition is completely clean
-             newSlide.style.transform = '';
-        }
-    });
-
-    // Update global state
-    currentSlide = newIndex;
-    updateNavButtons();
-    
-    // Run animations for the new slide
-    runSlideAnimations(newIndex);
+  // Run animations for the new slide
+  runSlideAnimations(newIndex);
 }
 
 function nextSlide() {
+  if (currentSlide < totalSlides - 1) {
     showSlide(currentSlide + 1);
+  }
 }
 
 function prevSlide() {
+  if (currentSlide > 0) {
     showSlide(currentSlide - 1);
+  }
 }
 
 function clearSlideAnimations(index) {
@@ -368,11 +376,11 @@ function displayDummyStats() {
 document.addEventListener("DOMContentLoaded", function() {
   displayDummyStats();
 
-  // Set up initial slide visibility and classes
   slides.forEach((slide, index) => {
     slide.style.position = "absolute";
     slide.style.top = "0";
     slide.style.width = "100%";
+    slide.style.height = "100%";
     slide.style.transform = index === 0 ? "translateX(0)" : "translateX(100%)";
   });
 

@@ -233,7 +233,6 @@ body {
 }
 
 /* === SLIDES === */
-/* === SLIDES === */
 .slide {
   position: absolute;
   top: 0;
@@ -249,13 +248,14 @@ body {
   transform: translateX(0); /* on-screen */
   opacity: 1;
   visibility: visible;
+  animation: slideIn 0.8s ease-out forwards; /* trigger entry animation */
 }
 
 .slide.prev {
   transform: translateX(-100%); /* off-screen to the left */
-  animation: slideOut 0.8s ease-out forwards;
   opacity: 0;
   visibility: hidden;
+  animation: slideOut 0.8s ease-out forwards; /* trigger exit animation */
 }
 
 @keyframes slideIn {
