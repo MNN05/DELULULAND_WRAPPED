@@ -40,8 +40,7 @@ function showSlide(newIndex) {
         onComplete: () => {
             oldSlide.classList.remove('active');
             oldSlide.style.opacity = 1;
-            oldSlide.style.transform = ''; // Reset transform for next use
-        }
+            oldSlide.style.transform = 'translateX(100%)';}
     });
 
     // Move new slide in
@@ -373,7 +372,7 @@ document.addEventListener("DOMContentLoaded", function() {
     slides.forEach((slide, index) => {
         if (index !== 0) {
             // Set initial position for slides 1 and onwards
-            slide.style.transform = 'translateX(100%)';
+            slide.style.transform = index > 0 ? 'translateX(100%)' : 'translateX(0)';
             slide.style.position = 'absolute';
             slide.style.top = '0';
             slide.style.width = '100%';

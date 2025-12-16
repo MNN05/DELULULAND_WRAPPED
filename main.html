@@ -191,6 +191,11 @@
                 </div>
             </section>
 
+            <div class="nav">
+                <button id="prevBtn" onclick="prevSlide()">◀</button> 
+                <button id="nextBtn" onclick="nextSlide()">▶</button>
+                <button id="musicToggle" onclick="toggleMusic()" class="music-btn" title="Toggle Music">🎵</button>
+            </div>
         </div>
     </div>
 
@@ -222,12 +227,6 @@
             if (gmmtvImg.complete && !gmmtvImg.naturalWidth) gmmtvImg.onerror();
         }
     </script>
-
-    <div class="nav">
-        <button id="prevBtn" onclick="prevSlide()">◀</button> 
-        <button id="nextBtn" onclick="nextSlide()">▶</button>
-        <button id="musicToggle" onclick="toggleMusic()" class="music-btn" title="Toggle Music">🎵</button>
-    </div>
 
     <script src="script.js"></script>
 
