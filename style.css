@@ -12,6 +12,10 @@ body {
     width: 100vw;
 }
 
+#scrollWrapper{
+    position: relative;
+}
+
 /* === ANIMATED BACKGROUND WITH FLOATING BLOBS === */
 .slides-page, .welcome-page {
     background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #663399);
@@ -371,8 +375,9 @@ body {
 /* === NAVIGATION === */
 .nav {
     position: absolute;
-    bottom: 20px;
+    bottom: 5px;
     left: 50%;
+    display: flex;
     transform: translateX(-50%);
     z-index: 1000;
     display: flex;
