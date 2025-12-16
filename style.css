@@ -370,8 +370,8 @@ body {
 
 /* === NAVIGATION === */
 .nav {
-    position: fixed;
-    bottom: 40px;
+    position: absolute;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
@@ -503,7 +503,7 @@ body {
 }
 
 /* === MOBILE RESPONSIVENESS === */
-@media (max-width: 768px) {
+@media (max-width: 468px) {
     .slide {
         padding: 40px 20px 140px 20px;
     }
@@ -542,7 +542,7 @@ body {
     }
 
     .nav {
-        bottom: 20px;
+        bottom: 5px;
         gap: 10px;
         padding: 12px 15px;
     }
