@@ -366,20 +366,17 @@ function displayDummyStats() {
 
 // --- INITIALIZATION ---
 document.addEventListener("DOMContentLoaded", function() {
-    displayDummyStats();
-    
-    // Set up initial slide visibility and classes
-    slides.forEach((slide, index) => {
-        if (index !== 0) {
-            // Set initial position for slides 1 and onwards
-            slide.style.transform = index > 0 ? 'translateX(100%)' : 'translateX(0)';
-            slide.style.position = 'absolute';
-            slide.style.top = '0';
-            slide.style.width = '100%';
-        }
-    });
-    
-    slides[0].classList.add('active');
-    updateNavButtons();
-    runSlideAnimations(0);
+  displayDummyStats();
+
+  // Set up initial slide visibility and classes
+  slides.forEach((slide, index) => {
+    slide.style.position = "absolute";
+    slide.style.top = "0";
+    slide.style.width = "100%";
+    slide.style.transform = index === 0 ? "translateX(0)" : "translateX(100%)";
+  });
+
+  slides[0].classList.add("active");
+  updateNavButtons();
+  runSlideAnimations(0);
 });
